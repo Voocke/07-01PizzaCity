@@ -44,6 +44,5 @@ abstract class PizzaCity(
         println("Процент человек, которые показывают чек: $percentOfSoldCoffee")
         println("Процент человек, которые не показывают чек: ${100 - percentOfSoldCoffee}")
 
-
     }
 }

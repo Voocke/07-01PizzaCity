@@ -27,7 +27,10 @@ class PizzaPeter(
         println("Спасибо за покупку тирольской пиццы в Санкт-Петербурге")
     }
 
-
+    override var countNeapolitanWithCoffee = 0
+    override var countRomanWithCoffee = 0
+    override var countSicilianWithCoffee = 0
+    override var countTyroleanWithCoffee = 0
 
     override fun drinkSale(): Boolean {
         println("Вы будете кофе?")
@@ -42,6 +45,11 @@ class PizzaPeter(
             return false
         }
         else return false
+    }
+
+    fun showStatisticsPit() {
+        super.showStatistics()
+
     }
 
 }

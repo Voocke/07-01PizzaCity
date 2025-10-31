@@ -1,5 +1,5 @@
 package main
-val tempPizzaChoice = 0
+var pizzaChoice = 0
 fun main() {
     val pizzaPeter = PizzaPeter(
         320.0, 450.5,
@@ -32,22 +32,27 @@ fun main() {
         selectPizza(currentPizzaCity)
     }
 }
+
 private fun selectPizza(currentPizzaCity: PizzaCity) {
 
     when (readln()) {
         "1" -> {
+            pizzaChoice = 1
             currentPizzaCity.neapolitanPizzaSale()
             selectAddService(currentPizzaCity)
         }
         "2" -> {
+            pizzaChoice = 2
             currentPizzaCity.romanPizzaSale()
             selectAddService(currentPizzaCity)
         }
         "3" -> {
+            pizzaChoice = 3
             currentPizzaCity.sicilianPizzaSale()
             selectAddService(currentPizzaCity)
         }
         "4" -> {
+            pizzaChoice = 4
             currentPizzaCity.tyroleanPizzaSale()
             selectAddService(currentPizzaCity)
         }
@@ -61,11 +66,9 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
 private fun selectAddService(currentPizzaCity: PizzaCity) {
     when (currentPizzaCity) {
         is CheckPhoto -> currentPizzaCity.showCheckPhoto()
-        is Drink -> { TODO()
-//            if(currentPizzaCity.drinkSale())
-//                when(tempPizzaChoice){
-//
-//                }
+        is Drink -> {
+            if(currentPizzaCity.drinkSale())
+                currentPizzaCity.pizzaWithCoffee(pizzaChoice)
         }
     }
 }
