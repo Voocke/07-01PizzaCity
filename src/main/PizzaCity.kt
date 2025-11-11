@@ -16,6 +16,12 @@ abstract class PizzaCity(
     var soldCoffeeCount = 0
     var rejectCoffeeCount = 0
 
+
+    var countNeapolitanWithCoffee = 0
+    var countRomanWithCoffee = 0
+    var countSicilianWithCoffee = 0
+    var countTyroleanWithCoffee = 0
+
     abstract fun neapolitanPizzaSale()
     abstract fun romanPizzaSale()
     abstract fun sicilianPizzaSale()
@@ -36,13 +42,60 @@ abstract class PizzaCity(
                 soldCoffeeCount * coffeePrice) - discountSum
         println("Всего заработано денег: $sum")
 
-        val percentOfShownChecks = 100 / (showCheckCount + nonShownCheckCount / showCheckCount)
-        println("Процент человек, которые показывают чек: $percentOfShownChecks")
-        println("Процент человек, которые не показывают чек: ${100 - percentOfShownChecks}")
+        val percentOfShownChecks: Int = if (showCheckCount != 0)
+            100 / (showCheckCount + nonShownCheckCount / showCheckCount)
+        else 0
 
-        val percentOfSoldCoffee = 100 / (soldCoffeeCount + rejectCoffeeCount / soldCoffeeCount)
-        println("Процент человек, которые показывают чек: $percentOfSoldCoffee")
-        println("Процент человек, которые не показывают чек: ${100 - percentOfSoldCoffee}")
+        println("Процент человек, которые показывают чек: $percentOfShownChecks%")
+        println("Процент человек, которые не показывают чек: ${100 - percentOfShownChecks}%")
 
+        val percentOfSoldCoffee: Int = if (soldCoffeeCount != 0)
+            100 / (soldCoffeeCount + rejectCoffeeCount / soldCoffeeCount)
+        else 0
+
+        println("Процент человек, которые берут кофе: $percentOfSoldCoffee%")
+        println("Процент человек, которые не берут кофе: ${100 - percentOfSoldCoffee}%")
+
+    }
+
+
+    fun pizzaWithMostCoffee() {
+        when {
+            countNeapolitanWithCoffee > countRomanWithCoffee && countNeapolitanWithCoffee > countSicilianWithCoffee && countNeapolitanWithCoffee > countTyroleanWithCoffee -> {
+                println("Больше всего кофе берут с неаполетанской пиццей")
+            }
+            countRomanWithCoffee > countNeapolitanWithCoffee && countRomanWithCoffee > countSicilianWithCoffee && countRomanWithCoffee > countTyroleanWithCoffee -> {
+                println("Больше всего кофе берут с римской пиццей")
+            }
+            countSicilianWithCoffee > countNeapolitanWithCoffee && countSicilianWithCoffee > countRomanWithCoffee && countSicilianWithCoffee > countTyroleanWithCoffee -> {
+                println("Больше всего кофе берут с сицилийской пиццей")
+            }
+            countTyroleanWithCoffee > countNeapolitanWithCoffee && countTyroleanWithCoffee > countRomanWithCoffee && countTyroleanWithCoffee > countSicilianWithCoffee -> {
+                println("Больше всего кофе берут с тирольской пиццей")
+            }
+            else -> {
+                println("Есть несколько пицц с максимальным значениями")
+            }
+        }
+        val totalPizzaWithCoffeeCount = countNeapolitanWithCoffee + countRomanWithCoffee + countSicilianWithCoffee + countTyroleanWithCoffee
+        val neapolitanWithCoffeePercent = countNeapolitanWithCoffee * 100 / totalPizzaWithCoffeeCount
+        val romanWithCoffeePercent = countRomanWithCoffee * 100 / totalPizzaWithCoffeeCount
+        val sicilianWithCoffeePercent = countSicilianWithCoffee * 100 / totalPizzaWithCoffeeCount
+        val tyroleanWithCoffeePercent = countTyroleanWithCoffee * 100 / totalPizzaWithCoffeeCount
+
+        println("$countNeapolitanWithCoffee шт. кофе взяли с неаполетанской пиццей - $neapolitanWithCoffeePercent%")
+        println("$countRomanWithCoffee шт. кофе взяли с римской пиццей - $romanWithCoffeePercent%")
+        println("$countSicilianWithCoffee шт. кофе взяли с сицилийской пиццей - $sicilianWithCoffeePercent%")
+        println("$countTyroleanWithCoffee шт. кофе взяли с тирольской пиццей - $tyroleanWithCoffeePercent%")
+
+    }
+
+    fun pizzaWithCoffee(pizzaChoice: Int) {
+        when (pizzaChoice){
+            1 -> countNeapolitanWithCoffee++
+            2 -> countRomanWithCoffee++
+            3 -> countSicilianWithCoffee++
+            4 -> countTyroleanWithCoffee++
+        }
     }
 }
