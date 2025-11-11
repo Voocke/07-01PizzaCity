@@ -20,7 +20,7 @@ fun main() {
     var currentPizzaCity: PizzaCity
 
     while (true) {
-        println("Добрый день! Выберите город")
+        println("\nДобрый день! Выберите город")
         println("1. Москва\n2. Санкт-Петербург\n3. Казань\n0. Выход из программы")
 
         currentPizzaCity = when (readln()) {
@@ -64,11 +64,15 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
             selectAddService(currentPizzaCity)
         }
         "0" -> {
-            currentPizzaCity.showStatistics()
+            currentPizzaCity.showMainStatistics()
             when (currentPizzaCity) {
-                is PizzaPeter -> println()
-                is PizzaMoscow -> println()
-                is PizzaKazan -> println()
+                is PizzaPeter -> currentPizzaCity.showPizzaWithMostCoffee()
+                is PizzaMoscow -> currentPizzaCity.showCheckStats()
+                is PizzaKazan -> {
+                    currentPizzaCity.showPizzaWithMostCoffee()
+                    currentPizzaCity.showCheckStats()
+                    currentPizzaCity.showSauceStats()
+                }
             }
         }
         else -> {
@@ -78,17 +82,15 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
     }
 }
 private fun selectAddService(currentPizzaCity: PizzaCity) {
-    when (currentPizzaCity) {
-        is CheckPhoto -> currentPizzaCity.showCheckPhoto()
-        is Drink -> {
-            if (currentPizzaCity.drinkSale())
-                currentPizzaCity.pizzaWithCoffee(pizzaChoice)
-            else
-                return
-        }
-        is Sauce -> {
-            //TODO написать функцию по продаже соусов
-        }
+    if (currentPizzaCity is CheckPhoto) {
+        currentPizzaCity.showCheckPhoto()
+    }
+    if (currentPizzaCity is Drink) {
+        if (currentPizzaCity.drinkSale())
+            currentPizzaCity.pizzaWithCoffee(pizzaChoice)
+    }
+    if (currentPizzaCity is Sauce) {
+        currentPizzaCity.sauceSell()
     }
 }
 

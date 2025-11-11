@@ -1,6 +1,5 @@
 package main
 
-import kotlin.inc
 
 class PizzaPeter(
     neapolitanPizzaPrice: Double, romanPizzaPrice: Double,
@@ -32,16 +31,19 @@ class PizzaPeter(
     override fun drinkSale(): Boolean {
         println("Вы будете кофе?")
         println("1. Да\n2. Нет")
-        if (readln() == "1"){
-            soldCoffeeCount++
-            println("С вас 200 рублей")
-            return true
+        val input = readln()
+        when (input) {
+            "1" -> {
+                soldCoffeeCount++
+                println("С вас 200 рублей")
+                return true
+            }
+            "2" -> {
+                rejectCoffeeCount++
+                return false
+            }
+            else -> return false
         }
-        else if (readln() == "2"){
-            rejectCoffeeCount++
-            return false
-        }
-        else return false
     }
 
 }

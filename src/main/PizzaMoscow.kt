@@ -29,12 +29,13 @@ class PizzaMoscow (
     override fun showCheckPhoto() {
         println("У вас есть фотография чека?")
         println("1. Да\n2. Нет")
-        if (readln() == "1") {
+        val input = readln()
+        if (input == "1") {
             showCheckCount++
             discountSum += 50
             println("Вам будет скидка 50 рублей с покупки")
         }
-        else if (readln() == "2"){
+        else if (input == "2"){
             nonShownCheckCount++
         }
     }

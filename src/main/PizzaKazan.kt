@@ -30,12 +30,13 @@ class PizzaKazan(
     override fun showCheckPhoto() {
         println("У вас есть фотография чека?")
         println("1. Да\n2. Нет")
-        if (readln() == "1") {
+        val input = readln()
+        if (input == "1") {
             showCheckCount++
             discountSum += 50
             println("Вам будет скидка 50 рублей с покупки")
         }
-        else if (readln() == "2"){
+        else if (input == "2"){
             nonShownCheckCount++
         }
     }
@@ -43,12 +44,13 @@ class PizzaKazan(
     override fun drinkSale(): Boolean {
         println("Вы будете кофе?")
         println("1. Да\n2. Нет")
-        if (readln() == "1"){
+        val input = readln()
+        if (input == "1"){
             soldCoffeeCount++
             println("С вас 200 рублей")
             return true
         }
-        else if (readln() == "2"){
+        else if (input == "2"){
             rejectCoffeeCount++
             return false
         }
@@ -56,6 +58,20 @@ class PizzaKazan(
     }
 
     override fun sauceSell() {
+        println("Соус понадобится? (любой соус - $saucePrice рублей)")
+        println("1. Да\n2. Нет")
 
+        if (readln() == "1"){
+            println("У нас есть сырный и томатный соуса")
+            println("1. Сырный\n2. Томантый")
+            when (readln()){
+                "1" -> cheeseSauceCount++
+                "2" -> tomatoSauceCount++
+                else -> sauceSell()
+            }
+        }
+        else{
+            rejectedSauceCount++
+        }
     }
 }
